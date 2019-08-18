@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件切换动画</title>
+    <script src="../vue.js/vue.min.js"></script>
+    <style>
+        .v-enter,
+        .v-leave-to {
+            opacity: 0;
+            transform: translateX(150px);
+        }
+
+        .v-enter-active,
+        .v-leave-active {
+            transition: all 0.5s ease;
+        }
+    </style>
+
+</head>
+<body>
+<div id="app">
+    <!--prevent阻止a标签点击事件-->
+    <a href="#" @click.prevent="comName='login'">登录</a>
+    <a href="#" @click.prevent="comName='register'">注册</a>
+    <transition mode="out-in">
+        <component :is="comName"></component>
+    </transition>
+
+</div>
+<template id="login">
+    <h3>登录组件</h3>
+</template>
+<template id="register">
+    <h3>注册组件</h3>
+</template>
+<script>
+    Vue.component('login',{
+        template:"#login"
+    });
+    Vue.component('register',{
+        template:"#register"
+    });
+    new Vue({
+        el:"#app",
+        data:{
+            comName:"login"
+        }
+    });
+</script>
+</body>
+</html>

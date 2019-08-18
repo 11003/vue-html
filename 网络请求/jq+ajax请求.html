@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jq+ajax请求</title>
+
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div id="container">
+    <component-name></component-name>
+</div>
+<template id="componentId">
+    <ul class="list-group">
+        <li class="list-group-item" @click="deleteTask(list.author)">
+            {{ list.author }}
+        </li>
+        <li class="list-group-item">
+            {{ list.origin }}
+        </li>
+        <li class="list-group-item">
+            {{ list.content }}
+        </li>
+    </ul>
+</template>
+<script src="../vue.js/vue.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    Vue.component("component-name",{
+        template:"#componentId",
+        props:['list'],
+        data:function(){
+            return {
+                list:{
+                    author:"",
+                    origin:"",
+                    content:"",
+                }
+            };
+        },
+        methods:{
+            onInit(){
+                let _this = this;
+                $.getJSON("https://api.gushi.ci/shuqing.json",function(res){
+                    _this.list = res;
+                });
+            },
+            deleteTask(index){
+                console.log(index)
+            }
+        },
+        created(){
+            let _this = this;
+            setInterval(function(){
+                _this.onInit();
+            },2000)
+        }
+    });
+    new Vue({
+        el:"#container"
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <button @click="lang">浪起来</button>
+    <button @click="stop">stop</button>
+    <p>{{ msg }}</p>
+</div>
+<script src="vue.js/vue.min.js"></script>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            timer: null,
+            msg: "猥琐发育！~~~"
+        },
+        methods: {
+            lang() {
+                var _this = this;
+                //阻止定时器追加
+                if(_this.timer != null)return;
+
+                _this.timer = setInterval(function(){
+                    var start = _this.msg.substring(0,1);
+                    var end = _this.msg.substring(1);
+                    _this.msg = end+start;
+                },100)
+            },
+            stop() {
+                clearInterval(this.timer);
+                this.timer = null;
+            }
+        },
+        created(){
+            // var _this = this;
+            // setInterval(function(){
+            //     var start = _this.msg.substring(0,1);
+            //     var end = _this.msg.substring(1);
+            //     _this.msg = end+start;
+            // },100)
+        }
+    });
+</script>
+</body>
+</html>

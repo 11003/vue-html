@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>生命周期实例</title>
+</head>
+<body>
+<div id="app">
+    <input type="button" @click="msg='No'" value="Edit">
+    <h3 id="h3">{{ msg }}</h3>
+</div>
+<script src="vue.js/vue.min.js"></script>
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            msg: "ok"
+        },
+        methods: {
+            show() {
+                console.log('执行了show方法');
+            }
+        },
+        beforeCreate() {
+            // console.log(this.msg);
+        },
+        created() {
+            // this.show()
+        },
+        beforeMount() {
+            // console.log(
+            //     document.getElementById('h3').innerText
+            // )
+        },
+        mounted() {
+            // console.log(
+            //     document.getElementById('h3').innerText
+            // )
+        },
+        beforeUpdate() {
+            // console.log('界面上元素的内容是：' + document.getElementById('h3').innerText);
+            // console.log('data中msg的数据是：' + this.msg)
+        },
+        updated(){
+            // console.log('界面上元素的内容是：' + document.getElementById('h3').innerText);
+            // console.log('data中msg的数据是：' + this.msg)
+        }
+
+    });
+</script>
+</body>
+</html>

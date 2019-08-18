@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>请求接口</title>
+    <script src="../vue.js/vue.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<style>
+    .slide-fade-enter-active {
+        transition: all .3s ease;
+    }
+    .slide-fade-leave-active {
+        transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+    }
+    .slide-fade-enter, .slide-fade-leave-to
+        /* .slide-fade-leave-active for below version 2.1.8 */ {
+        transform: translateX(10px);
+        opacity: 0;
+    }
+</style>
+<div id="app">
+    <input type="button" value="get" @click="getInfo">
+    <transition name="slide-fade">
+        <p v-show="show">{{title}}</p>
+    </transition>
+</div>
+<script>
+
+    new Vue({
+        el: "#app",
+        data: {
+            list:"",
+            title: "",
+            show: false
+        },
+        methods: {
+            getInfo() {
+                let _this = this;
+                axios.post('https://api.gushi.ci/shuqing.json').then(function (res) {
+                    //成功获取数据
+                    let data = res.data;
+                    _this.title = data.content;
+                    _this.show = true;
+
+                }).catch(function (err) {
+                    //请求错误
+                    _this.show = false;
+                    console.log(err);
+                });
+            },
+            getInfoTime(){
+                let _this = this;
+                setInterval(function(){
+                    _this.getInfo();
+                },3000)
+            }
+        },
+        created(){
+            this.getInfoTime();
+        }
+    });
+</script>
+</body>
+</html>

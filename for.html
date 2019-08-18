@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>for循环的注意事项</title>
+</head>
+<body>
+<div id="app">
+    <p v-for="(item,index) in list" key="index">
+        <input type="checkbox">
+        {{ item.id }} ---- {{ item.name }}
+    </p>
+    <input type="button" value="toggle" @click="flag=!flag">
+    <h3 v-show="flag">show元素</h3>
+</div>
+<script src="vue.js/vue.min.js"></script>
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            flag:true,
+            list:[
+                {id:1,name:"小马"},
+                {id:2,name:"小红"},
+                {id:3,name:"小太"},
+                {id:4,name:"小明"},
+                {id:5,name:"小海"},
+            ]
+        },
+    });
+</script>
+</body>
+</html>

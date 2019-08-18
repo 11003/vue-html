@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>创建组件的方式</title>
+    <script src="../vue.js/vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <my-com></my-com>
+</div>
+<script>
+    /*    let com = Vue.extend({
+            template:"<h3> 这是使用 Vue.extend 创建的组件</h3>"
+        });*/
+    /*   Vue.component("myCom",Vue.extend({
+           template:"<h3> 这是使用 Vue.extend 创建的组件</h3>"
+       }));*/
+
+    //注意：无论哪种方式创建出来的组件，组件的 template 属性指向的模板内容，必须有且只有一个根元素
+    Vue.component("myCom", {
+        template: "<div><h3> 这是使用 Vue.extend 创建的组件</h3><span>dsadsa</span></div>"
+    });
+
+    new Vue({
+        el: "#app"
+    });
+</script>
+</body>
+</html>

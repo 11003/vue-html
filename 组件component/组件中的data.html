@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件中的data</title>
+    <script src="../vue.js/vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <login></login>
+</div>
+
+<template id="temp">
+    <div>
+        <h1>哈哈哈</h1>
+        <h4>这是一个私有的组件</h4>
+    </div>
+</template>
+<script>
+
+    new Vue({
+        el: "#app",
+        data: {},
+        methods: {},
+        filters: {},
+        directives: {}, //指令
+        components: {
+            login: {
+                template: "#temp",
+                data: function () {
+                    return {
+                        msg: "这是data定义的数据"
+                    }
+                }
+            }
+        }, //组件
+
+        beforeCreate() {
+        },
+        created() {
+        },
+        beforeMount() {
+        },
+        mounted() {
+        },
+        beforeUpdate() {
+        },
+        updated() {
+        },
+        beforeDestroy() {
+        },
+        destroyed() {
+        }
+    });
+</script>
+</body>
+</html>

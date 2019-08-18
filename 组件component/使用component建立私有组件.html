@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>使用component建立私有组件</title>
+    <script src="../vue.js/vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+</div>
+
+<div id="temp">
+    <div>
+        <h1>哈哈哈</h1>
+        <h4>这是一个私有的组件</h4>
+    </div>
+</div>
+<script>
+    new Vue({
+        el: "#app",
+        data: {},
+        methods: {},
+        filters: {},
+        directives: {}, //指令
+        components: {
+            login:{
+                template:"#temp"
+            }
+        }, //组件
+
+        beforeCreate() {},
+        created(){},
+        beforeMount() {},
+        mounted() {},
+        beforeUpdate() {},
+        updated(){},
+        beforeDestroy(){},
+        destroyed(){}
+    });
+</script>
+</body>
+</html>

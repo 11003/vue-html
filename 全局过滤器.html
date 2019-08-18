@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>全局过滤器</title>
+</head>
+<body>
+<div id="app">
+    <!--追加-->
+    <p>{{msg | msgFormat("疯狂") | test}}</p>
+</div>
+<script src="vue.js/vue.min.js"></script>
+<script>
+
+    Vue.filter('msgFormat', function (msg, arg) {
+        return msg.replace(/单纯/g, arg);
+    });
+
+    Vue.filter('test', function (msg) {
+        return msg + "======";
+    });
+
+    new Vue({
+        el: "#app",
+        data: {
+            msg: "我曾经是个单纯的男孩，我单纯的问上天，谁是最单纯的男人"
+        }
+    })
+</script>
+</body>
+</html>

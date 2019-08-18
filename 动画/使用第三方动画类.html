@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>使用第三方动画类</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    <script src="../vue.js/vue.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <input type="button" value="toggle" @click="flag = !flag">
+    <transition
+            :duration="{ enter: 500, leave:400 }"
+            enter-active-class="animated fadeIn"
+            leave-active-class="animated fadeOut"
+    >
+        <h3 v-if="flag">显示与否</h3>
+    </transition>
+</div>
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            flag: true
+        },
+        methods: {},
+    });
+</script>
+</body>
+</html>
