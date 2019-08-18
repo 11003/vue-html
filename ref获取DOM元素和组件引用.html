@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ref获取DOM元素和组件引用</title>
+	<script src="vue.js/vue.min.js"></script>
+</head>
+<body>
+	<div id="app">
+		<button @click="getInfo">点击</button>
+		<login ref="mylogin"></login>	
+	</div>
+	<script>
+		var login = {
+			template: '<h1>登录组件</h1>',
+			data(){
+				return {
+					msg: 'son msg'
+				}
+			},
+			methods:{
+				show(){
+					alert(1);
+					console.log("调用了子组件的方法")
+				}
+			}
+		};
+		var vm = new Vue({
+			el:"#app",
+			data:{},
+			methods:{
+				getInfo(){
+					//访问组件变量
+					// console.log(this.$refs.mylogin.msg);
+					//访问组件方法
+					this.$refs.mylogin.show()
+				}
+			},
+			components:{
+				login
+			}
+		});
+	</script>
+</body>
+</html>
