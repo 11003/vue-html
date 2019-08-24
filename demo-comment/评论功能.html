@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+</head>
+<body>
+<div id="app">
+    <com-temp @func="loadComments"></com-temp>
+    <ul class="list-group">
+        <li class="list-group-item" v-for="item in list" :key="item.id">
+            {{ item.content }}
+            <span class="badge">评论人： {{ item.user }}</span>
+        </li>
+    </ul>
+</div>
+<template id="temp">
+    <div>
+        <div class="form-group">
+            <label for="">评论人：</label>
+            <input type="text" class="form-control" v-model="user">
+        </div>
+        <div class="form-group">
+            <label for="">评论内容：</label>
+            <textarea name="" class="form-control" v-model="content"></textarea>
+        </div>
+        <div class="form-group">
+            <input type="button" class="btn btn-success" value="提交"  @click="postComment">
+        </div>
+        <div class="alert alert-success" role="alert" v-show="is_success">评论成功！</div>
+    </div>
+</template>
+<script src="../vue.js/vue.min.js"></script>
+<script>
+    let components = {
+        template:"#temp",
+        data(){
+            return {
+                is_success:false,
+                user:"",
+                content:""
+            }
+        },
+        methods:{
+            postComment(){
+                let comment = {id:Date.now(),user:this.user,content:this.content};
+                //先获取是否有缓存否
+                let list = JSON.parse(localStorage.getItem("comment") || '[]');
+                list.push(comment);
+                //获取到再把值设置进去
+                localStorage.setItem("comment",JSON.stringify(list));
+                this.user = this.content = "";
+                this.$emit("func");
+                this.is_success = true;
+                this.msg();
+            },
+            msg(){
+
+                setTimeout(()=>{
+                    this.is_success= false;
+                },800)
+            }
+        }
+    };
+    new Vue({
+        el:"#app",
+        components:{
+           "comTemp":components
+        },
+        data:{
+            list:[
+                {id:1,content:"厕所",user:"用户1"},
+                {id:2,content:"厕所1",user:"用户2"},
+                {id:3,content:"厕1所",user:"用户3"},
+            ]
+        },
+        methods:{
+            loadComments(val){
+                let list = JSON.parse(localStorage.getItem("comment") || '[]');
+                this.list = list;
+                // console.log(val)
+            }
+        },
+        created(){
+            this.loadComments();
+        }
+    });
+</script>
+</body>
+</html>
